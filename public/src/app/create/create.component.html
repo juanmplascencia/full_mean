@@ -1,3 +1,5 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <button (click)="cancel()">Cancel</button> 
 <h3>Put the question and options here:</h3>
 <section>
@@ -8,6 +10,7 @@
         required
         minlength="8"
         [(ngModel)]="survey.question"
+        #question="ngModel"
         >
         <span *ngIf="question.invalid && (question.dirty || question.touched)">
           <span *ngIf="question.errors.required">Question is required.</span>
@@ -19,6 +22,7 @@
         required
         minlength="3"
         [(ngModel)]="survey.option1"
+        #option1="ngModel"
         >
         <span *ngIf="option1.invalid && (option1.dirty || option1.touched)">
           <span *ngIf="option1.errors.required">Option is required.</span>
@@ -30,6 +34,7 @@
         required
         minlength="3"
         [(ngModel)]="survey.option2"
+        #option2="ngModel"
         >
         <span *ngIf="option2.invalid && (option2.dirty || option2.touched)">
           <span *ngIf="option2.errors.required">Option is required.</span>
@@ -41,6 +46,7 @@
         required
         minlength="3"
         [(ngModel)]="survey.option3"
+        #option3="ngModel"
         >
         <span *ngIf="option3.invalid && (option3.dirty || option3.touched)">
           <span *ngIf="option3.errors.required">Option is required.</span>
@@ -52,6 +58,7 @@
         required
         minlength="3"
         [(ngModel)]="survey.option4"
+        #option4="ngModel"
         >
         <span *ngIf="option4.invalid && (option4.dirty || option4.touched)">
           <span *ngIf="option4.errors.required">Option is required.</span>
