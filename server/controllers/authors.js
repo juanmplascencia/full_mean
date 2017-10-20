@@ -1,11 +1,13 @@
 var mongoose = require('mongoose');
 var Author = mongoose.model('authors');
+var Survey = mongoose.model('surveys');
 var path = require('path');
 
 module.exports = {
-    
-    show: (req,res,next) => {
-        Author.find({}, function(err, results){
+    showAll: (req,res,next) => {
+        Survey.find({})
+        .populate('_author')
+        .exec( function(err, results){
             if(err) { 
                 res.json(err);
             } else {
@@ -13,9 +15,8 @@ module.exports = {
             }
         });
     },
-
     showOne: (req,res,next) => {
-        Author.findOne({_id: req.params.id}, function(err, result){
+        Author.findOne({name: req.params.name}, function(err, result){
             if(err) { 
                 res.json(err);
             } else {
@@ -23,53 +24,13 @@ module.exports = {
             }
         });
     },
-
     create: (req,res,next) => {
         var author = new Author(req.body);
-        author.save( function(err){
+        author.save( function(err,result){
             if(err) { 
                 res.json(err);
             } else {
-                res.json({message:"Creation Success"});
-            }
-        });
-    },
-
-    remove: (req,res,next) => {
-        Author.remove({_id: req.params.id}, function(err){
-            if(err) { 
-                res.json(err); 
-            } else {
-                res.json({message:"Delete Success"});
-            }
-        });
-    },
-
-    update: (req, res) => {
-        Author.findById({_id: req.params.id}, (err, author) => {
-            if(author){
-                author.name = req.body.name;
-                author.save((err) => {
-                    if(err){
-                        return res.send(err)
-                    }
-                    return res.json({message: 'author updated!'})
-                })
-            }
-            else{
-                console.log('error')
-            }
-        });
-    },
-
-    showAll: (req,res,next) => {
-        Book.find({})
-        .populate('_books')
-        .exec( function(err, results){
-            if(err) { 
-                res.json(err);
-            } else {
-                res.json(results);
+                res.json(result);
             }
         });
     }

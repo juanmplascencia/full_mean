@@ -1,0 +1,64 @@
+<button (click)="cancel()">Cancel</button> 
+<h3>Put the question and options here:</h3>
+<section>
+  <div class="create">
+    <form (submit)="create()" #formData="ngForm">
+      <p>Question:
+        <input type="text" name="question"
+        required
+        minlength="8"
+        [(ngModel)]="survey.question"
+        >
+        <span *ngIf="question.invalid && (question.dirty || question.touched)">
+          <span *ngIf="question.errors.required">Question is required.</span>
+          <span *ngIf="question.errors.minlength">Question must be at least 8 characters long.</span>
+        </span>
+      </p> 
+      <p>Option 1:
+        <input type="text" name="option1"
+        required
+        minlength="3"
+        [(ngModel)]="survey.option1"
+        >
+        <span *ngIf="option1.invalid && (option1.dirty || option1.touched)">
+          <span *ngIf="option1.errors.required">Option is required.</span>
+          <span *ngIf="option1.errors.minlength">Option must be at least 3 characters long.</span>
+        </span>
+      </p> 
+      <p>Option 2:
+        <input type="text" name="option2"
+        required
+        minlength="3"
+        [(ngModel)]="survey.option2"
+        >
+        <span *ngIf="option2.invalid && (option2.dirty || option2.touched)">
+          <span *ngIf="option2.errors.required">Option is required.</span>
+          <span *ngIf="option2.errors.minlength">Option must be at least 3 characters long.</span>
+        </span>
+      </p> 
+      <p>Option 3:
+        <input type="text" name="option3"
+        required
+        minlength="3"
+        [(ngModel)]="survey.option3"
+        >
+        <span *ngIf="option3.invalid && (option3.dirty || option3.touched)">
+          <span *ngIf="option3.errors.required">Option is required.</span>
+          <span *ngIf="option3.errors.minlength">Option must be at least 3 characters long.</span>
+        </span>
+      </p> 
+      <p>Option 4:
+        <input type="text" name="option4"
+        required
+        minlength="3"
+        [(ngModel)]="survey.option4"
+        >
+        <span *ngIf="option4.invalid && (option4.dirty || option4.touched)">
+          <span *ngIf="option4.errors.required">Option is required.</span>
+          <span *ngIf="option4.errors.minlength">Option must be at least 3 characters long.</span>
+        </span>
+      </p> 
+      <input type='submit' value="Create Poll" [disabled]="!formData.valid">
+    </form>
+  </div>
+</section>

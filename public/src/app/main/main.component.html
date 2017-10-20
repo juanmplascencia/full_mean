@@ -1,0 +1,21 @@
+<button (click)="create()">Create a New Poll</button> 
+<button (click)="logout()">Logout</button> 
+
+<h3>Current Polls:</h3>
+
+<table>
+    <thead>
+        <th>Name</th>
+        <th>Survey Question</th>
+        <th>Date Posted</th>
+        <th>Action</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let survey of surveys">
+            <td>{{survey._author.name}}</td>
+            <td><button (click)="vote(survey._id)">{{survey.question}}</button></td>
+            <td>{{survey.createdAt}}</td>
+            <td *ngIf="survey._author._id === user"><input type="button" value="Delete" (click)="destroy(survey._id)"></td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,18 @@
+<button (click)="main()">Go to Polls</button> 
+
+<h3>{{survey.question}}</h3>
+
+<table>
+  <thead>
+    <th>Option</th>
+    <th>Current Count of Votes</th>
+    <th>Action</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let vote of survey.votes; let i = index">
+      <td>{{survey.options[i]}}</td>
+      <td>{{vote}}</td>
+      <td><input type="button" value="Vote" (click)="add(i)"></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,13 @@
+<section>
+  <div class="login">
+    <form (submit)="login()" #formData="ngForm">
+      <p>Your Name:
+        <input type="text" name="name"
+        required
+        [(ngModel)]="user.name"
+        >
+      </p> 
+      <input type='submit' value="Login" [disabled]="!formData.valid">
+    </form>
+  </div>
+</section>

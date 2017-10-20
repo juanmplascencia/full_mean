@@ -3,9 +3,8 @@ var Schema = mongoose.Schema;
 
 var AuthorSchema = new mongoose.Schema({
     name: { type: String },
-    _books: [{ type: Schema.Types.ObjectId, ref: 'books' }]
-    
-    }, {timestamps: true});
+    surveys: [{ type: Schema.Types.ObjectId, ref: 'surveys' }]
+}, {timestamps: true});
 
 var Author = mongoose.model('authors', AuthorSchema);
 module.exports = Author;

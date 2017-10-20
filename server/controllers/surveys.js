@@ -1,22 +1,11 @@
 var mongoose = require('mongoose');
-var Book = mongoose.model('books');
+var Survey = mongoose.model('surveys');
 var path = require('path');
 var Author = mongoose.model('authors');
 
 module.exports = {
-    
-    show: (req,res,next) => {
-        Book.find({}, function(err, results){
-            if(err) { 
-                res.json(err);
-            } else {
-                res.json(results);
-            }
-        });
-    },
-
     showOne: (req,res,next) => {
-        Book.findOne({_id: req.params.id}, function(err, result){
+        Survey.findOne({_id: req.params.id}, function(err, result){
             if(err) { 
                 res.json(err);
             } else {
@@ -30,10 +19,10 @@ module.exports = {
             if(err) { 
                 res.json(err);
             } else {
-                var book = new Book(req.body);
-                book._author = author._id;
-                author._books.push(book);
-                book.save( function(err){
+                var survey = new Survey(req.body);
+                survey._author = author._id;
+                author.surveys.push(survey);
+                survey.save( function(err){
                     if(err) { 
                         res.json(err);
                     } else {
@@ -41,7 +30,7 @@ module.exports = {
                             if(err) { 
                                 res.json(err);
                             } else {
-                                res.json({message:"Creation Success"});
+                                res.json(survey);
                             }
                         });
                     }
@@ -52,7 +41,7 @@ module.exports = {
     },
 
     remove: (req,res,next) => {
-        Book.remove({_id: req.params.id}, function(err){
+        Survey.remove({_id: req.params.id}, function(err){
             if(err) { 
                 res.json(err); 
             } else {
@@ -62,30 +51,20 @@ module.exports = {
     },
 
     update: (req, res) => {
-        Book.findById({_id: req.params.id}, (err, book) => {
-            if(book){
-                book.name = req.body.name;
-                book.save((err) => {
+        Survey.findOne({_id: req.params.id}, (err, survey) => {
+            if(survey){
+                survey.votes = req.body.votes;
+                survey.save((err) => {
                     if(err){
-                        return res.send(err)
+                        res.json(err)
                     }
-                    return res.json({message: 'book updated!'})
+                    else{
+                        res.json({message: 'Survey updated!'})
+                    }
                 })
             }
             else{
-                console.log('error')
-            }
-        });
-    },
-
-    showAll: (req,res,next) => {
-        Author.findOne({_id: req.params.id})
-        .populate('_books')
-        .exec( function(err, result){
-            if(err) { 
-                res.json(err);
-            } else {
-                res.json(result);
+                res.json(err)
             }
         });
     }
